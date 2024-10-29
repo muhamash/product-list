@@ -1,7 +1,25 @@
 /* eslint-disable react/no-unescaped-entities */
-// import React from 'react';
+import React from 'react';
 
-export default function Header() {
+export default function Header ()
+{
+    const [ loading, setLoading ] = React.useState( true );
+
+    React.useEffect( () =>
+    {
+        const timer = setTimeout( () =>
+        {
+            setLoading( false );
+        }, 1000 );
+
+        return () => clearTimeout( timer );
+    }, [] );
+    
+    const loader = <div className="flex items-center justify-center h-full w-full bg-gray-200">
+        <div className="spinner border-t-4 border-b-4 border-teal-500 rounded-full w-12 h-12 animate-spin">
+        </div>
+    </div>;
+
     return (
         <div className="relative mt-[100px] overflow-hidden bg-white">
             <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
@@ -15,8 +33,6 @@ export default function Header() {
                     </div>
                     <div>
                         <div className="mt-10">
-                            {/* <!-- Decorative image grid --> */ }
-
                             <a
                                 href="#"
                                 className="inline-block rounded-md border border-transparent bg-teal-600 px-8 py-3 text-center font-medium text-white hover:bg-teal-700"
@@ -33,57 +49,59 @@ export default function Header() {
                                 <div className="flex items-center space-x-6 lg:space-x-8">
                                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                                         <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100 hover:scale-105 transition-all duration-200">
-                                            <img
+                                            { loading ? loader : <img
                                                 src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                                 alt=""
                                                 className="h-full w-full object-cover object-center"
-                                            />
+                                            /> }
+                                            
                                         </div>
                                         <div className="h-64 w-44 overflow-hidden rounded-lg hover:scale-105 transition-all duration-200">
-                                            <img
+                                            { loading ? loader : <img
                                                 src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                                 alt=""
                                                 className="h-full w-full object-cover object-center"
-                                            />
+                                            /> }
+                                            
                                         </div>
                                     </div>
                                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                                         <div className="h-64 w-44 overflow-hidden rounded-lg hover:scale-105 transition-all duration-200">
-                                            <img
+                                            { loading ? loader : <img
                                                 src="https://images.unsplash.com/photo-1507680434567-5739c80be1ac?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                                 alt=""
                                                 className="h-full w-full object-cover object-center"
-                                            />
+                                            /> }
                                         </div>
                                         <div className="h-64 w-44 overflow-hidden rounded-lg hover:scale-105 transition-all duration-200">
-                                            <img
+                                            { loading ? loader : <img
                                                 src="https://images.unsplash.com/photo-1540827109409-17f40944f276?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                                 alt=""
                                                 className="h-full w-full object-cover object-center"
-                                            />
+                                            /> }
                                         </div>
                                         <div className="h-64 w-44 overflow-hidden rounded-lg hover:scale-105 transition-all duration-200">
-                                            <img
+                                            { loading ? loader : <img
                                                 src="https://images.unsplash.com/photo-1610419993549-7429619cdbd1?q=80&w=1915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                                 alt=""
                                                 className="h-full w-full object-cover object-center"
-                                            />
+                                            /> }
                                         </div>
                                     </div>
                                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                                         <div className="h-64 w-44 overflow-hidden rounded-lg hover:scale-105 transition-all duration-200">
-                                            <img
+                                            { loading ? loader : <img
                                                 src="https://images.unsplash.com/photo-1505022610485-0249ba5b3675?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                                 alt=""
                                                 className="h-full w-full object-cover object-center"
-                                            />
+                                            /> }
                                         </div>
                                         <div className="h-64 w-44 overflow-hidden rounded-lg hover:scale-105 transition-all duration-200">
-                                            <img
+                                            { loading ? loader : <img
                                                 src="https://images.unsplash.com/photo-1597196526281-fe4861daa915?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                                 alt=""
                                                 className="h-full w-full object-cover object-center"
-                                            />
+                                            /> }
                                         </div>
                                     </div>
                                 </div>

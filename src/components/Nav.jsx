@@ -34,15 +34,16 @@ export default function Nav ()
                             </svg>
                         </button>
                         <div
-                            className={ `absolute top-0 left-0 h-screen w-full bg-cyan-600 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+                            className={ `absolute top-0 left-0 h-screen w-[80%] bg-cyan-600 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
                                 } transition-transform duration-300 ease-in-out lg:hidden` }
                         >
                             <button
                                 onClick={ toggleMenu }
                                 className="p-4 text-black-600"
                             >
-                                Close
+                                X(close)
                             </button>
+                            <p className="p-2 font-mono text-base text-yellow-500">Sorry there is no content!! this website is not appearing with full form</p>
                         </div>
 
                         {/* <!-- Logo --> */ }
