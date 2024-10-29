@@ -1,18 +1,28 @@
 import { useState } from 'react';
+import useProduct from '../hooks/useProduct';
+import useProductContext from '../hooks/useProductContext';
 
 export default function Filter() {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [ selectedOption, setSelectedOption ] = useState( null );
+    const { dispatch } = useProductContext();
+    const { data: categories, isLoading, error } = useProduct( true );
+    // console.log( categories );
 
     const toggleDropdown = () => {
         setIsOpen((prev) => !prev);
     };
 
-    const handleCheckboxChange = (option) => {
-        setSelectedOption((prev) => (prev === option ? null : option));
+    const handleCheckboxChange = ( option ) =>
+    {
+        const newSelectedOption = ( selectedOption === option ) ? null : option;
+        setSelectedOption( newSelectedOption );
+        dispatch( { type: "CATEGORY", payload: newSelectedOption } );
     };
 
-    const cat = [ "electronics", "jewelery", "men's clothing", "women's clothing" ];
+
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
         <div className="relative inline-block text-left">
@@ -45,7 +55,7 @@ export default function Filter() {
                     id="filter-dropdown"
                 >
                     <div className="py-1" role="none">
-                        {cat?.map((category, index) => (
+                        {categories?.map((category, index) => (
                             <label key={index} className="inline-flex w-full cursor-pointer hover:bg-gray-50 items-center px-4 py-2 text-sm text-gray-700">
                                 <input
                                     type="checkbox"

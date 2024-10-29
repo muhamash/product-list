@@ -1,11 +1,21 @@
-// import React from 'react'
+import useProduct from '../hooks/useProduct';
+import useProductContext from '../hooks/useProductContext';
 import Cart from './Cart';
+import CustomSkeleton from './CustomSkeleton';
 import Filter from './Filter';
+import ProductCard from './ProductCard';
 import ProductListTitle from './ProductListTitle';
 import Search from './Search';
 import Sort from './Sort';
 
 export default function ProductSection() {
+    const { state } = useProductContext();
+    const { selectedCategory } = state;
+    const { data: product, isLoading, error } = useProduct(false, selectedCategory );
+
+
+    const skeletonArray = Array.from( { length: 8 } );
+
     return (
         <div className="pt-16 sm:pt-24 lg:pt-40">
             <ProductListTitle />
@@ -15,13 +25,38 @@ export default function ProductSection() {
                         <Sort />
                         <Filter />
                     </div>
-
                     <div className="flex gap-2 items-center">
-                        <Search/>
-                        <Cart/>
+                        <Search />
+                        <Cart />
+                    </div>
+                </div>
+                <div className="bg-white">
+                    <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                            {
+                                isLoading ? (
+                                    skeletonArray.map((_, index) => (
+                                        <CustomSkeleton key={ index } />
+                                    ))
+                                ) : (
+                                    product?.map((p, index) => (
+                                        <ProductCard
+                                            key={index}
+                                            title={p.title}
+                                            category={p.category}
+                                            image={p.image}
+                                            price={p.price}
+                                        />
+                                    ))
+                                )
+                            }
+                            {
+                                error && ( <p className="font-mono text-red-700 text-base">Something is wrong!!! : { error}</p>)
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
