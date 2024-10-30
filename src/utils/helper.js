@@ -18,7 +18,8 @@ const fetchSearchResults = async ( url ) =>
     
 };
 
-const debounceFn = (func, delay) => {
+const debounceFn = ( func, delay ) =>
+{
     let timer;
     return function ( ...args )
     {
@@ -44,7 +45,12 @@ const sortData = ( array, direction ) =>
         }
 
         return 0;
-    })
+    } );
+};
+
+const searchData = ( array, searchTerm ) =>
+{
+    return [ ...array ].filter( d => d.title && d.title.toLowerCase().includes( searchTerm.toLowerCase() ) );
 }
 
-export { debounceFn, fetchSearchResults, sortData };
+export { debounceFn, fetchSearchResults, searchData, sortData };

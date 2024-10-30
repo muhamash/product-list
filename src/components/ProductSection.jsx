@@ -1,5 +1,6 @@
 import useProduct from '../hooks/useProduct';
 import useProductContext from '../hooks/useProductContext';
+import { searchData } from '../utils/helper';
 import Cart from './Cart';
 import CustomSkeleton from './CustomSkeleton';
 import Filter from './Filter';
@@ -10,9 +11,10 @@ import Sort from './Sort';
 
 export default function ProductSection() {
     const { state } = useProductContext();
-    const { selectedCategory, sortData } = state;
-    const { data: product, isLoading, error } = useProduct(false, selectedCategory, sortData );
-
+    const { selectedCategory, sortData, searchQuery } = state;
+    const { data: product, isLoading, error } = useProduct( false, selectedCategory, sortData );
+    
+    const productData = searchData( product, searchQuery );
 
     const skeletonArray = Array.from( { length: 8 } );
 
@@ -39,7 +41,7 @@ export default function ProductSection() {
                                         <CustomSkeleton key={ index } />
                                     ))
                                 ) : (
-                                    product?.map((p, index) => (
+                                    productData?.map((p, index) => (
                                         <ProductCard
                                             key={index}
                                             title={p.title}
@@ -52,6 +54,9 @@ export default function ProductSection() {
                             }
                             {
                                 error && ( <p className="font-mono text-red-700 text-base">Something is wrong!!! : { error}</p>)
+                            }
+                            {
+                               productData.length === 0 && (<p className="font-mono text-red-600 text-xl text-center">404! No matches found</p>)
                             }
                         </div>
                     </div>

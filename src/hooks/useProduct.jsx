@@ -49,7 +49,8 @@ const useProduct = ( category = false, selectedCategory = "", direction ) =>
         };
     }, [ category, selectedCategory ] );
 
-    const sortedData = sortData(data, direction)
+    const sortedData = sortData( data, direction )
+
 
     return { data: sortedData, error, isLoading };
 };
