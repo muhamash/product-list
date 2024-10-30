@@ -49,18 +49,6 @@ const useProduct = ( category = false, selectedCategory = "", direction ) =>
         };
     }, [ category, selectedCategory ] );
 
-    // const sortedData = [ ...data ].sort( ( a, b ) =>
-    // {
-    //     if ( sortData === "Low to High" )
-    //     {
-    //         return a.price - b.price;
-    //     } else if ( sortData === "High to Low" )
-    //     {
-    //         return b.price - a.price;
-    //     }
-    //     return 0;
-    // } );
-
     const sortedData = sortData(data, direction)
 
     return { data: sortedData, error, isLoading };

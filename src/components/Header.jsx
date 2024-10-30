@@ -14,7 +14,7 @@ export default function Header() {
 
     const loader = (
         <div className="flex items-center justify-center h-full w-full bg-gray-200">
-            <div className="spinner border-t-4 border-b-4 border-teal-500 rounded-full w-12 h-12 animate-spin"></div>
+            <div className="border-t-4 border-b-4 border-teal-500 rounded-full w-12 h-12 animate-spin"></div>
         </div>
     );
 

@@ -9,7 +9,9 @@ export default function ProductCard({ image, title, category, price }) {
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none lg:h-80 relative">
                 { loading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-200 z-10">
-                        <div className="spinner border-t-4 border-b-4 border-teal-500 rounded-full w-12 h-12 animate-spin"></div>
+                        <div className="border-t-4 border-b-4 border-yellow-500 rounded-full w-12 h-12 animate-spin">
+
+                        </div>
                     </div>
                 ) }
                 <img
