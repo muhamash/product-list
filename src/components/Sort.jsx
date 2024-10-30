@@ -1,11 +1,18 @@
 import { useState } from 'react';
+import useProductContext from '../hooks/useProductContext';
 
 export default function Sort() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [ isOpen, setIsOpen ] = useState( false );
+    const { dispatch } = useProductContext();
 
     const toggleDropdown = () => {
         setIsOpen((prev) => !prev);
     };
+
+    const handleSortChange = ( sort ) =>
+    {
+        dispatch({ type: 'SORT', payload: sort });
+    }
 
     return (
         <div className="relative inline-block text-left">
@@ -16,7 +23,7 @@ export default function Sort() {
                     id="menu-button"
                     aria-expanded={isOpen}
                     aria-haspopup="true"
-                    onClick={toggleDropdown} // Toggle dropdown on button click
+                    onClick={toggleDropdown} 
                 >
                     Sort
                     <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -30,7 +37,7 @@ export default function Sort() {
             </div>
 
             {/* Sort Options */}
-            {isOpen && ( // Show sort options only when isOpen is true
+            {isOpen && (
                 <div
                     className="absolute z-10 mt-2 left-5 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
@@ -40,6 +47,7 @@ export default function Sort() {
                 >
                     <div className="py-1" role="none">
                         <span
+                            onClick={() => handleSortChange('Low to High')} 
                             className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
                             role="menuitem"
                             tabIndex="-1"
@@ -48,6 +56,7 @@ export default function Sort() {
                             Low to High
                         </span>
                         <span
+                            onClick={() => handleSortChange('High to Low')} 
                             className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
                             role="menuitem"
                             tabIndex="-1"

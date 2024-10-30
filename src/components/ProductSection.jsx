@@ -10,8 +10,8 @@ import Sort from './Sort';
 
 export default function ProductSection() {
     const { state } = useProductContext();
-    const { selectedCategory } = state;
-    const { data: product, isLoading, error } = useProduct(false, selectedCategory );
+    const { selectedCategory, sortData } = state;
+    const { data: product, isLoading, error } = useProduct(false, selectedCategory, sortData );
 
 
     const skeletonArray = Array.from( { length: 8 } );

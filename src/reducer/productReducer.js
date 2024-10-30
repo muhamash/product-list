@@ -3,11 +3,11 @@ export const productReducer = ( state, action ) =>
     switch ( action.type )
     {
         case 'CATEGORY':
-            return { ...state, searchQuery: "", selectedCategory: action.payload };
+            return { ...state, selectedCategory: action.payload };
         case 'SEARCH':
-            return { ...state, searchQuery: action.payload, selectedCategory: "" };
+            return { ...state, searchQuery: action.payload };
         case 'SORT':
-            return { ...state, searchQuery: "", selectedCategory: "", sortData: action.payload };
+            return { ...state, sortData: action.payload };
         default:
             return state;
     }

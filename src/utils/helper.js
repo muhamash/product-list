@@ -8,7 +8,7 @@ const fetchSearchResults = async ( url ) =>
             throw new Error( 'Failed to fetch data' );
         }
         const data = await response.json();
-        console.log( data );
+        // console.log( data );
         return data;
     }
     catch ( error )
@@ -30,4 +30,21 @@ const debounceFn = (func, delay) => {
     };
 };
 
-export { debounceFn, fetchSearchResults };
+const sortData = ( array, direction ) =>
+{
+    return [ ...array ].sort( ( a, b ) =>
+    {
+        if ( direction === "Low to High" )
+        {
+            return a.price - b.price;
+        }
+        else if ( direction === "High to Low" )
+        {
+            return b.price - a.price;
+        }
+
+        return 0;
+    })
+}
+
+export { debounceFn, fetchSearchResults, sortData };

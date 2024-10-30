@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { fetchSearchResults } from "../utils/helper.js";
+import { fetchSearchResults, sortData } from "../utils/helper.js";
 
-const useProduct = (category = false, selectedCategory = "") => {
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+const useProduct = ( category = false, selectedCategory = "", direction ) =>
+{
+    const [ data, setData ] = useState( [] );
+    const [ error, setError ] = useState( null );
+    const [ isLoading, setIsLoading ] = useState( true );
 
-    useEffect(() => {
+    useEffect( () =>
+    {
         let ignore = false;
 
         const apiUrl = category
@@ -15,32 +17,53 @@ const useProduct = (category = false, selectedCategory = "") => {
                 ? `https://fakestoreapi.com/products/category/${selectedCategory}`  // Fetch specific category data
                 : "https://fakestoreapi.com/products";  // Fetch all products data
 
-        const fetchData = async () => {
-            setIsLoading(true);
-            try {
-                const result = await fetchSearchResults(apiUrl);
-                if (!ignore) {
-                    setData(result);
-                    setError(null);
+        const fetchData = async () =>
+        {
+            setIsLoading( true );
+            try
+            {
+                const result = await fetchSearchResults( apiUrl );
+                if ( !ignore )
+                {
+                    setData( result );
+                    setError( null );
                 }
-            } catch (error) {
-                if (!ignore) {
-                    setError("Failed to fetch products");
-                    console.error("Fetch error:", error);
+            } catch ( error )
+            {
+                if ( !ignore )
+                {
+                    setError( "Failed to fetch products" );
+                    console.error( "Fetch error:", error );
                 }
-            } finally {
-                if (!ignore) setIsLoading(false);
+            } finally
+            {
+                if ( !ignore ) setIsLoading( false );
             }
         };
 
         fetchData();
 
-        return () => {
+        return () =>
+        {
             ignore = true;
         };
-    }, [category, selectedCategory]);
+    }, [ category, selectedCategory ] );
 
-    return { data, error, isLoading };
+    // const sortedData = [ ...data ].sort( ( a, b ) =>
+    // {
+    //     if ( sortData === "Low to High" )
+    //     {
+    //         return a.price - b.price;
+    //     } else if ( sortData === "High to Low" )
+    //     {
+    //         return b.price - a.price;
+    //     }
+    //     return 0;
+    // } );
+
+    const sortedData = sortData(data, direction)
+
+    return { data: sortedData, error, isLoading };
 };
 
 export default useProduct;
