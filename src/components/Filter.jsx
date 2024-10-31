@@ -21,8 +21,8 @@ export default function Filter() {
     };
 
 
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    // if (isLoading) return 
+    // if (error) return <p>{error}</p>;
 
     return (
         <div className="relative inline-block text-left">
@@ -55,7 +55,10 @@ export default function Filter() {
                     id="filter-dropdown"
                 >
                     <div className="py-1" role="none">
-                        {categories?.map((category, index) => (
+                        {
+                            isLoading ? (
+                                <p className="text-base font-mono text-teal-600">Loading categories...</p>
+                            ) : categories?.map((category, index) => (
                             <label key={index} className="inline-flex w-full cursor-pointer hover:bg-gray-50 items-center px-4 py-2 text-sm text-gray-700">
                                 <input
                                     type="checkbox"
@@ -66,7 +69,11 @@ export default function Filter() {
                                 />
                                 <span className="ml-2">{category}</span>
                             </label>
-                        ))}
+                            ) )
+                        }
+                        {
+                            error && <p className="text-red-600 text-base font-thin">{ error }</p>
+                        }
                     </div>
                 </div>
             )}
