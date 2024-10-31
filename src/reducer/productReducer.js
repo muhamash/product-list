@@ -8,6 +8,8 @@ export const productReducer = ( state, action ) =>
             return { ...state, searchQuery: action.payload };
         case 'SORT':
             return { ...state, sortData: action.payload };
+        case 'CART':
+            return { ...state, cart: action.payload };
         default:
             return state;
     }

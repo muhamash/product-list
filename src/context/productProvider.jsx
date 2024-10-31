@@ -9,7 +9,8 @@ export default function ProductProvider({ children }) {
     const initialState = {
         selectedCategory: "",
         searchQuery: "",
-        sortData: ""
+        sortData: "",
+        cart: ""
     };
 
     const [state, dispatch] = useReducer(productReducer, initialState);
