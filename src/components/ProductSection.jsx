@@ -12,18 +12,18 @@ import Sort from './Sort';
 export default function ProductSection() {
     const { state } = useProductContext();
     const { selectedCategory, sortData, searchQuery } = state;
-    const { data: product, isLoading, error } = useProduct( false, selectedCategory, sortData );
+    const { data: product, isLoading, error } = useProduct(false, selectedCategory, sortData);
     
-    const productData = searchData( product, searchQuery );
+    const productData = searchData(product, searchQuery);
 
-    const skeletonArray = Array.from( { length: 8 } );
+    const skeletonArray = Array.from({ length: 8 });
 
     return (
         <div className="pt-16 sm:pt-24 lg:pt-40">
             <ProductListTitle />
             <div className="mt-10">
                 <div className="flex justify-between relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
-                    <div className='w-full'>
+                    <div className="w-full">
                         <Sort />
                         <Filter />
                     </div>
@@ -35,33 +35,30 @@ export default function ProductSection() {
                 <div className="bg-white">
                     <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                            {
-                                isLoading ? (
-                                    skeletonArray.map((_, index) => (
-                                        <CustomSkeleton key={ index } />
-                                    ))
-                                ) : (
-                                    productData?.map((p, index) => (
-                                        <ProductCard
-                                            key={index}
-                                            title={p.title}
-                                            category={p.category}
-                                            image={p.image}
-                                            price={p.price}
-                                        />
-                                    ))
-                                )
-                            }
-                            {
-                                error && ( <p className="font-mono text-red-700 text-base">Something is wrong!!! : { error}</p>)
-                            }
-                            {
-                               productData.length === 0 && (<p className="font-mono text-red-600 text-xl text-center">404! No matches found</p>)
-                            }
+                            {isLoading ? (
+                                skeletonArray.map((_, index) => (
+                                    <CustomSkeleton key={index} />
+                                ))
+                            ) : productData.length !== 0 ? (
+                                productData.map((p, index) => (
+                                    <ProductCard
+                                        key={index}
+                                        title={p.title}
+                                        category={p.category}
+                                        image={p.image}
+                                        price={p.price}
+                                    />
+                                ))
+                            ) : (
+                                <p className="font-mono text-red-600 text-xl text-center">404! No matches found</p>
+                            )}
+                            {error && (
+                                <p className="font-mono text-red-700 text-base text-center">Something is wrong!!! : {error}</p>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-};
+}
