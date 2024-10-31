@@ -13,9 +13,9 @@ export const productReducer = ( state, action ) =>
         case 'REMOVE_FROM_CART':
             return {
                 ...state,
-                addToCart: state.addToCart.filter( ( productId ) => productId !== action.payload )
+                addToCart: state.addToCart.filter( ( item ) => item.id !== action.payload.id )
             };
         default:
             return state;
-    };
+    }
 };

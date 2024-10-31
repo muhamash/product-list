@@ -1,3 +1,5 @@
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useProduct from '../hooks/useProduct';
 import useProductContext from '../hooks/useProductContext';
 import { searchData } from '../utils/helper';
@@ -56,6 +58,7 @@ export default function ProductSection() {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

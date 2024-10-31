@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import { Bounce, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useProductContext from "../hooks/useProductContext";
 
 export default function ProductButton({ data }) {
@@ -6,20 +8,49 @@ export default function ProductButton({ data }) {
 
     const isInCart = state.addToCart.some(cartItem => cartItem.id === data.id);
 
-    const handleCart = () => {
+    const handleCart = () =>
+    {
         const actionType = isInCart ? 'REMOVE_FROM_CART' : 'ADD_TO_CART';
-        dispatch({ type: actionType, payload: data });
+        dispatch( { type: actionType, payload: data } );
+        
+        if ( actionType === 'ADD_TO_CART' )
+        {
+            toast.success( '✅ Product added to the Cart!!!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            } );
+        } else
+        {
+            toast.warn( '❌ Product removed from the Cart!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            } );
+        }
     };
 
     return (
-        <div onClick={handleCart} className="flex px-3 py-2 justify-center cursor-pointer">
+        <button onClick={ handleCart } className={ `flex px-3 py-2 text-white justify-center cursor-pointer hover:shadow-md transition-all duration-200 ${isInCart ? "bg-rose-600" : "bg-teal-600"} w-full h-fit rounded-md` }>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="mr-2.5 h-5 w-5 flex-none stroke-slate-400"
+                className="mr-2.5 h-5 w-5 flex-none white"
             >
                 <path
                     strokeLinecap="round"
@@ -28,6 +59,7 @@ export default function ProductButton({ data }) {
                 />
             </svg>
             {isInCart ? 'Remove from Cart' : 'Add to Cart'}
-        </div>
+        </button>
+        // <ToastContainer />
     );
 };
