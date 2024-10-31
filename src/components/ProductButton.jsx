@@ -15,7 +15,7 @@ export default function ProductButton({ data }) {
         
         if ( actionType === 'ADD_TO_CART' )
         {
-            toast.success( '✅ Product added to the Cart!!!', {
+            toast.success( `${data.title} added to the Cart!!!`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -28,7 +28,7 @@ export default function ProductButton({ data }) {
             } );
         } else
         {
-            toast.warn( '❌ Product removed from Cart!', {
+            toast.warn( `${data.title} removed from Cart!`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,

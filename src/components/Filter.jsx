@@ -59,7 +59,7 @@ export default function Filter() {
                             isLoading ? (
                                 <p className="text-base font-mono text-teal-600">Loading categories...</p>
                             ) : categories?.map((category, index) => (
-                            <label key={index} className="inline-flex w-full cursor-pointer hover:bg-gray-50 items-center px-4 py-2 text-sm text-gray-700">
+                            <label key={index} className="inline-flex w-full cursor-pointer hover:bg-gray-50 items-center px-4 py-2 text-sm text-gray-700 z-10">
                                 <input
                                     type="checkbox"
                                     className="form-checkbox h-4 w-4"

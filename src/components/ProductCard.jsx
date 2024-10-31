@@ -11,16 +11,15 @@ export default function ProductCard({data}) {
         <div className="relative  flex flex-col shadow-md justify-between p-2 rounded-md">
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none lg:h-80 relative">
                 { loading && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-200 z-10">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-200 z-1">
                         <div className="border-t-4 border-b-4 border-yellow-500 rounded-full w-12 h-12 animate-spin">
-
                         </div>
                     </div>
                 ) }
                 <img
                     src={ image }
                     alt="product image"
-                    className={ `h-full w-full object-cover object-top lg:h-full lg:w-full p-4 bg-gray-100 ${loading ? 'hidden' : 'block'
+                    className={ `h-full w-full object-cover object-top lg:h-full lg:w-full p-4 rounded-md bg-gray-100 ${loading ? 'hidden' : 'block'
                         }` }
                     onLoad={ () => setLoading( false ) }
                 />
@@ -32,7 +31,7 @@ export default function ProductCard({data}) {
                 </div>
                 <p className="text-sm font-medium text-gray-900">{ price } ৳</p>
             </div>
-            <ProductButton data={data}/>
+            <ProductButton data={ data } />
         </div>
     );
-}
+};

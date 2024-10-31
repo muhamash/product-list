@@ -21,7 +21,7 @@ export default function ProductSection() {
     const skeletonArray = Array.from({ length: 8 });
 
     return (
-        <div className="pt-16 sm:pt-24 lg:pt-40">
+        <div id="productSection" className="pt-16 sm:pt-24 lg:pt-40">
             <ProductListTitle />
             <div className="mt-10">
                 <div className="flex justify-between relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">

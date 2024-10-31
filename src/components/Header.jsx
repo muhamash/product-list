@@ -45,12 +45,15 @@ export default function Header() {
                     </div>
                     <div>
                         <div className="mt-10">
-                            <a
-                                href="#"
+                            <button
+                                onClick={ () =>
+                                {
+                                    document.getElementById( "productSection" ).scrollIntoView( { behavior: 'smooth' } );
+                                }}
                                 className="inline-block rounded-md border border-transparent bg-teal-600 px-8 py-3 text-center font-medium text-white hover:bg-teal-700"
                             >
                                 Shop Collection
-                            </a>
+                            </button>
                         </div>
 
                         <div
