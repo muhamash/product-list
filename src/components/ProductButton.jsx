@@ -28,7 +28,7 @@ export default function ProductButton({ data }) {
             } );
         } else
         {
-            toast.warn( '❌ Product removed from the Cart!', {
+            toast.warn( '❌ Product removed from Cart!', {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
