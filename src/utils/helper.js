@@ -51,6 +51,6 @@ const sortData = ( array, direction ) =>
 const searchData = ( array, searchTerm ) =>
 {
     return [ ...array ].filter( d => d.title && d.title.toLowerCase().includes( searchTerm.toLowerCase() ) );
-}
+};
 
 export { debounceFn, fetchSearchResults, searchData, sortData };
