@@ -9,10 +9,13 @@ export const productReducer = ( state, action ) =>
         case 'SORT':
             return { ...state, sortData: action.payload };
         case 'ADD_TO_CART':
-            return { ...state, addToCart: action.payload };
+            return { ...state, addToCart: [ ...state.addToCart, action.payload ] };
         case 'REMOVE_FROM_CART':
-            return { ...state, removeFromCart: action.payload };
+            return {
+                ...state,
+                addToCart: state.addToCart.filter( ( productId ) => productId !== action.payload )
+            };
         default:
             return state;
-    }
+    };
 };

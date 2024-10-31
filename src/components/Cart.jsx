@@ -19,7 +19,7 @@ export default function Cart() {
                     />
                 </svg>
                 <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
-                <span className="sr-only">items in cart, view bag</span>
+                {/* <span className="sr-only">items in cart, view bag</span> */}
             </a>
         </div>
     );

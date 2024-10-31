@@ -43,10 +43,7 @@ export default function ProductSection() {
                                 productData.map((p, index) => (
                                     <ProductCard
                                         key={index}
-                                        title={p.title}
-                                        category={p.category}
-                                        image={p.image}
-                                        price={p.price}
+                                        data={p}
                                     />
                                 ))
                             ) : (
