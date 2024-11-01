@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useProduct } from '../hooks/useProduct';
@@ -11,7 +12,7 @@ import ProductListTitle from './ProductListTitle';
 import Search from './Search';
 import Sort from './Sort';
 
-export default function ProductSection() {
+export default function ProductSection({referenceValue}) {
     const { state } = useProductContext();
     const { selectedCategory, sortData, searchQuery } = state;
     const { data: product, isLoading, error } = useProduct(false, selectedCategory, sortData);
@@ -27,7 +28,8 @@ export default function ProductSection() {
                 <div className="flex justify-between relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
                     <div className="w-full">
                         <Sort />
-                        <Filter />
+                        {/* to pass here */}
+                        <Filter ref={ referenceValue } />
                     </div>
                     <div className="flex gap-2 items-center">
                         <Search />

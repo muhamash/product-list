@@ -1,13 +1,13 @@
- 
-import { useState } from 'react';
+/* eslint-disable react/display-name */
+import { forwardRef, useState } from 'react';
 import { useProduct } from '../hooks/useProduct';
 import useProductContext from '../hooks/useProductContext';
 
-export default function Filter() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+const Filter = forwardRef( (props, ref) => {
+    const [ isOpen, setIsOpen ] = useState( false );
+    const [ selectedOption, setSelectedOption ] = useState( null );
     const { dispatch } = useProductContext();
-    const { data: categories, isLoading, error } = useProduct(true);
+    const { data: categories, isLoading, error } = useProduct( true );
 
     const toggleDropdown = () =>
     {
@@ -40,7 +40,8 @@ export default function Filter() {
     };
 
     return (
-        <div className="relative inline-block text-left dropdown">
+        // to implement ref here
+        <div ref={ ref } className="relative inline-block text-left dropdown p-2">
             <div>
                 <button
                     type="button"
@@ -92,4 +93,6 @@ export default function Filter() {
             ) }
         </div>
     );
-}
+} );
+
+export default Filter;

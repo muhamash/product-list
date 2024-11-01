@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
+import { Bounce, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Drawer from './Drawer';
 
-export default function Nav() {
+export default function Nav({domRef}) {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const [active, setActive] = React.useState('');
+    const [ active, setActive ] = React.useState( '' );
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -13,11 +16,57 @@ export default function Nav() {
         setActive(item);
     };
 
-    const handleNavigationLinks = (item) =>
+    const handleNavigationLinks = ( item ) =>
     {
         toggleActive( item );
 
-    }
+        if ( item === 'Men' )
+        {
+            toast.info( `please select ${item}'s clothing option at the category menu to get specific products`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            } );
+            
+        }
+        else if ( item === 'Women' )
+        {
+            toast.info( `please select ${item}'s clothing option at the category menu to get specific products`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            } );
+        }
+
+        if ( item === 'Men' || item === 'Women' )
+        {
+            domRef.current.scrollIntoView( { behavior: 'smooth' } );
+            const intervalId = setInterval( () =>
+            {
+                domRef.current.classList.toggle( "bg-rose-600" );
+                domRef.current.classList.toggle( "text-white" );
+            }, 100 );
+
+            setTimeout( () =>
+            {
+                clearInterval( intervalId );
+                domRef.current.classList.remove( "bg-rose-600" );
+                domRef.current.classList.remove( "text-white" );
+            }, 3000 );
+        }
+    };
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white">
