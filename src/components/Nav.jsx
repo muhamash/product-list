@@ -1,5 +1,6 @@
  
 import React from 'react';
+import Drawer from './Drawer';
 
 export default function Nav ()
 {
@@ -18,6 +19,7 @@ export default function Nav ()
             <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="border-b border-gray-200">
                     <div className="flex h-16 items-center">
+
                         {/* <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. --> */ }
                         <button onClick={ toggleMenu } type="button" className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden">
                             <span className="absolute -inset-0.5"></span>
@@ -33,19 +35,8 @@ export default function Nav ()
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </button>
-                        <div
-                            className={ `absolute top-0 left-0 h-screen w-[80%] bg-cyan-600 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-                                } transition-transform duration-300 ease-in-out lg:hidden` }
-                        >
-                            <button
-                                onClick={ toggleMenu }
-                                className="p-4 text-black-600"
-                            >
-                                X(close)
-                            </button>
-                            <p className="p-2 font-mono text-base text-yellow-500">Sorry there is no content!! this website is not appearing with full form</p>
-                        </div>
-
+                        {/* drawer */}
+                        <Drawer isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}/>
                         {/* <!-- Logo --> */ }
                         <div className="ml-4 flex lg:ml-0">
                             <a href="#">
