@@ -37,6 +37,9 @@ export default function Cart() {
                 <span className="text-xs text-teal-700 opacity-0 group-hover:opacity-100 transition-opacity absolute right-0 bottom-8">
                     {state.addToCart.length} items in cart, {cartOpen ? 'close' : 'view'} the bag
                 </span>
+                <span className="sr-only">
+                    {state.addToCart.length} items in cart, {cartOpen ? 'close' : 'view'} the bag
+                </span>
             </button>
 
             {/* Cart Dropdown */}

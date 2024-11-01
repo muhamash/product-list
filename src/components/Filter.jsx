@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {useProduct} from '../hooks/useProduct';
+import { useProduct } from '../hooks/useProduct';
 import useProductContext from '../hooks/useProductContext';
 
 export default function Filter() {
@@ -18,6 +18,7 @@ export default function Filter() {
         const newSelectedOption = ( selectedOption === option ) ? null : option;
         setSelectedOption( newSelectedOption );
         dispatch( { type: "CATEGORY", payload: newSelectedOption } );
+        setIsOpen(false)
     };
 
 

@@ -11,7 +11,8 @@ export default function Sort() {
 
     const handleSortChange = ( sort ) =>
     {
-        dispatch({ type: 'SORT', payload: sort });
+        dispatch( { type: 'SORT', payload: sort } );
+        setIsOpen(false);
     }
 
     return (
