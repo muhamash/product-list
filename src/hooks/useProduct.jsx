@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchSearchResults, sortData } from "../utils/helper.js";
 
-const useProduct = (category = false, selectedCategory = "", direction) => {
+export const useProduct = (category = false, selectedCategory = "", direction) => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -49,5 +49,3 @@ const useProduct = (category = false, selectedCategory = "", direction) => {
 
     return { data: sortedData, error, isLoading };
 };
-
-export default useProduct;

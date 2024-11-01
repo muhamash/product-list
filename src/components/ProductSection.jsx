@@ -1,6 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useProduct from '../hooks/useProduct';
+import { useProduct } from '../hooks/useProduct';
 import useProductContext from '../hooks/useProductContext';
 import { searchData } from '../utils/helper';
 import Cart from './Cart';

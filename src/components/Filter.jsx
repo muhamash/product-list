@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useProduct from '../hooks/useProduct';
+import {useProduct} from '../hooks/useProduct';
 import useProductContext from '../hooks/useProductContext';
 
 export default function Filter() {
