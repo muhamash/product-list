@@ -1,17 +1,20 @@
- 
 import React from 'react';
 import Drawer from './Drawer';
 
-export default function Nav ()
-{
+export default function Nav() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [active, setActive] = React.useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const toggleActive = (item) => {
+        setActive(item);
+    };
+    
     return (
-        <header className="fixed top-0 left-0 right-0 z-50  bg-white">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white">
             <p className="flex h-10 items-center justify-center bg-teal-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
                 Get free delivery on orders over $100
             </p>
@@ -19,10 +22,8 @@ export default function Nav ()
             <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="border-b border-gray-200">
                     <div className="flex h-16 items-center">
-
-                        {/* <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. --> */ }
-                        <button onClick={ toggleMenu } type="button" className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden">
-                            <span className="absolute -inset-0.5"></span>
+                        {/* Mobile menu toggle */}
+                        <button onClick={toggleMenu} type="button" className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden">
                             <span className="sr-only">Open menu</span>
                             <svg
                                 className="h-6 w-6"
@@ -35,49 +36,47 @@ export default function Nav ()
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </button>
-                        {/* drawer */}
-                        <Drawer isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}/>
-                        {/* <!-- Logo --> */ }
+                        
+                        <Drawer isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+
+                        {/* Logo */}
                         <div className="ml-4 flex lg:ml-0">
                             <a href="#">
                                 <span className="sr-only">Your Company</span>
-                                <img className="h-8 w-auto" src="logo.svg" alt="" />
+                                <img className="h-8 w-auto" src="logo.svg" alt="logo?" />
                             </a>
                         </div>
 
-                        {/* <!-- Flyout menus --> */ }
+                        {/* Navigation items with active state */}
                         <div className="hidden lg:ml-8 lg:block lg:self-stretch">
                             <div className="flex h-full space-x-8">
-                                <div className="flex">
-                                    <div className="relative flex">
-                                        {/* <!-- Item active: "border-teal-600 text-teal-600", Item inactive: "border-transparent text-gray-700 hover:text-gray-800" --> */ }
-                                        <button
-                                            type="button"
-                                            className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800"
-                                            aria-expanded="false"
-                                        >
-                                            Women
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="flex">
-                                    <div className="relative flex">
-                                        {/* <!-- Item active: "border-teal-600 text-teal-600", Item inactive: "border-transparent text-gray-700 hover:text-gray-800" --> */ }
-                                        <button
-                                            type="button"
-                                            className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800"
-                                            aria-expanded="false"
-                                        >
-                                            Men
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <a href="#" className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Company</a>
-                                <a href="#" className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Stores</a>
+                                {["Women", "Men", "Stores"].map((item) => (
+                                    <button
+                                        key={item}
+                                        type="button"
+                                        onClick={() => toggleActive(item)}
+                                        className={`relative z-10 -mb-px flex items-center pt-px text-sm font-medium transition-colors duration-200 ease-out ${
+                                            active === item
+                                                ? "border-b-2 border-teal-600 text-teal-600"
+                                                : "border-b-2 border-transparent text-gray-700 hover:text-gray-800"
+                                        }`}
+                                        aria-expanded={active === item}
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
+                                <button onClick={ () =>
+                                {
+                                    document.getElementById("header").scrollIntoView({behavior: 'smooth'})
+                                }}  className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Company</button>
+                                {/* <button onClick={ () =>
+                                {
+                                    document.getElementById("productSection").scrollIntoView({behavior: 'smooth'})
+                                }} className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Stores</button> */}
                             </div>
                         </div>
 
+                        {/* Account and Currency options */}
                         <div className="ml-auto flex items-center">
                             <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                                 <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">Sign in</a>
