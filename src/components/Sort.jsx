@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+ 
 import { useState } from 'react';
 import useProductContext from '../hooks/useProductContext';
 
@@ -24,7 +24,7 @@ export default function Sort() {
         }
     };
 
-    const handleButtonClick = ( event ) =>
+    const handleButtonClick = ( ) =>
     {
         toggleDropdown();
         document.addEventListener( 'mousedown', handleClickOutside );

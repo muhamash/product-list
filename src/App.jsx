@@ -12,11 +12,9 @@ function App ()
   
   return (
     <>
-      {/* ref coded nav */}
       <Nav domRef={ productSectionRef } />
       <Header />
       <ProductProvider>
-        {/* ref to pass here */}
         <ProductSection referenceValue={ productSectionRef } />
       </ProductProvider>
       <Footer />

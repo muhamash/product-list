@@ -22,13 +22,12 @@ export default function ProductSection({referenceValue}) {
     const skeletonArray = Array.from({ length: 8 });
 
     return (
-        <div className="pt-16 sm:pt-24 lg:pt-40">
+        <div id="store" className="pt-16 sm:pt-24 lg:pt-[100px]">
             <ProductListTitle />
             <div className="mt-10">
-                <div className="flex justify-between relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
+                <div  id="productSection" className="flex justify-between relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
                     <div className="w-full">
                         <Sort />
-                        {/* to pass here */}
                         <Filter ref={ referenceValue } />
                     </div>
                     <div className="flex gap-2 items-center">
@@ -36,7 +35,7 @@ export default function ProductSection({referenceValue}) {
                         <Cart />
                     </div>
                 </div>
-                <div id="productSection" className="bg-white">
+                <div className="bg-white">
                     <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                             {isLoading ? (

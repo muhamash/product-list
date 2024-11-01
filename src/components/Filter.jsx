@@ -40,12 +40,12 @@ const Filter = forwardRef( (props, ref) => {
     };
 
     return (
-        // to implement ref here
-        <div ref={ ref } className="relative inline-block text-left dropdown p-2">
+        <div className="relative inline-block text-left dropdown rounded-md">
             <div>
                 <button
+                    ref={ ref }
                     type="button"
-                    className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm text-gray-400 hover:text-gray-500 focus:text-gray-700 transition-all"
+                    className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm text-gray-400 hover:text-gray-500 focus:text-gray-700 transition-all"
                     id="filter-button"
                     aria-expanded={ isOpen }
                     aria-haspopup="true"

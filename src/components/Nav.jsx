@@ -19,54 +19,41 @@ export default function Nav({domRef}) {
     const handleNavigationLinks = ( item ) =>
     {
         toggleActive( item );
+    
+        document.getElementById( "store" )?.scrollIntoView( { behavior: 'smooth' } );
 
-        if ( item === 'Men' )
+        if ( [ 'Men', 'Women' ].includes( item ) )
         {
-            toast.info( `please select ${item}'s clothing option at the category menu to get specific products`, {
+            toast.info( `Please select ${item}'s clothing option at the category menu to get specific products`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Bounce,
-            } );
-            
-        }
-        else if ( item === 'Women' )
-        {
-            toast.info( `please select ${item}'s clothing option at the category menu to get specific products`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
                 theme: "colored",
                 transition: Bounce,
             } );
         }
 
-        if ( item === 'Men' || item === 'Women' )
+        if ( domRef.current && [ 'Men', 'Women' ].includes( item ) )
         {
-            domRef.current.scrollIntoView( { behavior: 'smooth' } );
+            // domRef.current.scrollIntoView( { behavior: 'smooth' } );
             const intervalId = setInterval( () =>
             {
                 domRef.current.classList.toggle( "bg-rose-600" );
                 domRef.current.classList.toggle( "text-white" );
+                domRef.current.classList.toggle( "scale-110" );
             }, 100 );
 
             setTimeout( () =>
             {
                 clearInterval( intervalId );
-                domRef.current.classList.remove( "bg-rose-600" );
-                domRef.current.classList.remove( "text-white" );
+                domRef.current.classList.remove( "bg-rose-600", "text-white", "scale-110" );
             }, 3000 );
         }
     };
+
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white">
