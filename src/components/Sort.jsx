@@ -4,7 +4,7 @@ import useProductContext from '../hooks/useProductContext';
 
 export default function Sort() {
     const [isOpen, setIsOpen] = useState(false);
-    const { dispatch } = useProductContext();
+    const { dispatch, state } = useProductContext();
 
     const toggleDropdown = () =>
     {
@@ -70,7 +70,7 @@ export default function Sort() {
                     <div className="py-1" role="none">
                         <span
                             onClick={ () => handleOptionClick( 'Low to High' ) }
-                            className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+                            className={`cursor-pointer block px-4 py-2 text-sm text-gray-700 transition-all ${state.sortData === "Low to High" && "bg-teal-600 text-white"}`}
                             role="menuitem"
                             tabIndex="-1"
                             id="menu-item-0"
@@ -79,7 +79,7 @@ export default function Sort() {
                         </span>
                         <span
                             onClick={ () => handleOptionClick( 'High to Low' ) }
-                            className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+                            className={`cursor-pointer block px-4 py-2 text-sm text-gray-700 transition-all ${state.sortData === "High to Low" && "bg-teal-600 text-white"}`}
                             role="menuitem"
                             tabIndex="-1"
                             id="menu-item-1"

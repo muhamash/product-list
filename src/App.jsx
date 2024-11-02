@@ -12,9 +12,9 @@ function App ()
   
   return (
     <>
-      <Nav domRef={ productSectionRef } />
-      <Header />
       <ProductProvider>
+        <Nav domRef={ productSectionRef } />
+        <Header />
         <ProductSection referenceValue={ productSectionRef } />
       </ProductProvider>
       <Footer />

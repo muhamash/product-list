@@ -2,11 +2,13 @@
 import React from 'react';
 import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useProductContext from '../hooks/useProductContext';
 import Drawer from './Drawer';
 
 export default function Nav({domRef}) {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [ active, setActive ] = React.useState( '' );
+    const { state } = useProductContext();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -19,10 +21,23 @@ export default function Nav({domRef}) {
     const handleNavigationLinks = ( item ) =>
     {
         toggleActive( item );
-    
+
         document.getElementById( "store" )?.scrollIntoView( { behavior: 'smooth' } );
 
-        if ( [ 'Men', 'Women' ].includes( item ) )
+        if ( [ 'Men', 'Women' ].includes( item ) && item === "Men" && state.selectedCategory === "men's clothing" || item === "Women" && state.selectedCategory === "women's clothing")
+        {
+            toast.error( `You have already selected ${item}'s category`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "colored",
+                transition: Bounce,
+            } );
+        }
+        else if ( [ 'Men', 'Women' ].includes( item ) && item !== state.selectedCategory)
         {
             toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
                 position: "top-right",
@@ -35,6 +50,80 @@ export default function Nav({domRef}) {
                 transition: Bounce,
             } );
         }
+        // {
+        //     if ( item === 'Men' )
+        //     {
+        //         if ( state.selectedCategory === "men's clothing" )
+        //         {
+        //             toast.info( `You have already selected ${item}'s category`, {
+        //                 position: "top-right",
+        //                 autoClose: 5000,
+        //                 hideProgressBar: false,
+        //                 closeOnClick: true,
+        //                 pauseOnHover: true,
+        //                 draggable: true,
+        //                 theme: "colored",
+        //                 transition: Bounce,
+        //             } );
+        //         }
+        //         else
+        //         {
+        //             toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
+        //                 position: "top-right",
+        //                 autoClose: 5000,
+        //                 hideProgressBar: false,
+        //                 closeOnClick: true,
+        //                 pauseOnHover: true,
+        //                 draggable: true,
+        //                 theme: "colored",
+        //                 transition: Bounce,
+        //             } );
+                
+        //         }
+        //         if ( item === "Women" )
+        //         {
+        //         if ( state.selectedCategory === "women's clothing" )
+        //         {
+        //             toast.info( `You have already selected ${item}'s category`, {
+        //                 position: "top-right",
+        //                 autoClose: 5000,
+        //                 hideProgressBar: false,
+        //                 closeOnClick: true,
+        //                 pauseOnHover: true,
+        //                 draggable: true,
+        //                 theme: "colored",
+        //                 transition: Bounce,
+        //             } );
+        //         }
+        //         else
+        //         {
+        //             toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
+        //                 position: "top-right",
+        //                 autoClose: 5000,
+        //                 hideProgressBar: false,
+        //                 closeOnClick: true,
+        //                 pauseOnHover: true,
+        //                 draggable: true,
+        //                 theme: "colored",
+        //                 transition: Bounce,
+        //             } );
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
+        //         position: "top-right",
+        //         autoClose: 5000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         theme: "colored",
+        //         transition: Bounce,
+        //     } );
+        // }
+        // auto scroll
 
         if ( domRef.current && [ 'Men', 'Women' ].includes( item ) )
         {
