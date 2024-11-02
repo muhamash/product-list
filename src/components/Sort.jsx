@@ -13,7 +13,7 @@ export default function Sort() {
 
     const handleSortChange = (sort) => {
         dispatch({ type: 'SORT', payload: sort });
-        setIsOpen(false);
+        // setIsOpen(false);
     };
 
     const handleClickOutside = ( event ) =>
@@ -61,7 +61,7 @@ export default function Sort() {
             {/* Sort Options */ }
             { isOpen && (
                 <div
-                    className="absolute z-10 mt-2 left-5 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="absolute z-10  hover:z-20 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="menu-button"

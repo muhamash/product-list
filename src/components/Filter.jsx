@@ -26,7 +26,7 @@ const Filter = forwardRef( (props, ref) => {
         const newSelectedOption = selectedOption === option ? null : option;
         setSelectedOption( newSelectedOption );
         dispatch( { type: "CATEGORY", payload: newSelectedOption } );
-        setIsOpen( false );
+        // setIsOpen( false );
         document.removeEventListener( 'mousedown', handleClickOutside );
     };
 
@@ -51,7 +51,8 @@ const Filter = forwardRef( (props, ref) => {
                     aria-haspopup="true"
                     onClick={ toggleDropdown }
                 >
-                    Filter
+                    {/* Filter */ }
+                    {selectedOption ? selectedOption : "All products"}
                     <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path
                             fillRule="evenodd"

@@ -50,7 +50,7 @@ export default function Nav({domRef}) {
             {
                 clearInterval( intervalId );
                 domRef.current.classList.remove( "bg-rose-600", "text-white", "scale-110" );
-            }, 3000 );
+            }, 2000 );
         }
     };
 
@@ -79,7 +79,7 @@ export default function Nav({domRef}) {
                             </svg>
                         </button>
                         
-                        <Drawer isMenuOpen={ isMenuOpen } toggleMenu={ toggleMenu } />
+                        <Drawer isMenuOpen={ isMenuOpen } toggleMenu={ toggleMenu } handleNavigation={handleNavigationLinks}/>
 
                         {/* Logo */ }
                         <div className="ml-4 flex lg:ml-0">
