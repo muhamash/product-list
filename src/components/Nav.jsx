@@ -24,7 +24,7 @@ export default function Nav({domRef}) {
 
         if ( [ 'Men', 'Women' ].includes( item ) )
         {
-            toast.info( `Please select ${item}'s clothing option at the category menu to get specific products`, {
+            toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,

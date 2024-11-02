@@ -4,17 +4,35 @@ import useProductContext from "../hooks/useProductContext";
 export default function Cart() {
     const [cartOpen, setCartOpen] = React.useState(false);
     const { state } = useProductContext();
-    
-    const handleOpenCart = () => {
-        setCartOpen(!cartOpen);
+
+    const handleOpenCart = () =>
+    {
+        if ( !cartOpen )
+        {
+            setCartOpen( true );
+            document.addEventListener( 'click', handleDocumentClick );
+        } else
+        {
+            setCartOpen( false );
+            document.removeEventListener( 'click', handleDocumentClick );
+        }
+    };
+
+    const handleDocumentClick = ( event ) =>
+    {
+        if ( !event.target.closest( '.cart-button' ) && !event.target.closest( '.cart-dropdown' ) )
+        {
+            setCartOpen( false );
+            document.removeEventListener( 'click', handleDocumentClick );
+        }
     };
 
     return (
         <div className="relative">
             {/* Cart Button */}
-            <button 
-                onClick={handleOpenCart} 
-                className="group -m-2 flex items-center p-2 relative"
+            <button
+                onClick={handleOpenCart}
+                className="group -m-2 flex items-center p-2 relative cart-button"
                 aria-expanded={cartOpen}
             >
                 <svg
@@ -44,12 +62,12 @@ export default function Cart() {
 
             {/* Cart Dropdown */}
             {cartOpen && (
-                <div className="absolute z-10 right-0 mt-2 w-64 p-4 bg-teal-600 text-white rounded-md shadow-lg max-h-[300px] overflow-y-scroll">
+                <div className="absolute z-10 right-0 mt-2 w-64 p-4 bg-teal-600 text-white rounded-md shadow-lg max-h-[300px] overflow-y-scroll cart-dropdown">
                     {state.addToCart.length > 0 ? (
                         state.addToCart.map((item, index) => (
                             <div key={index} className="flex justify-between items-center mb-2">
-                                <p className="text-sm font-mono">{item.title}</p>
-                                <p className="text-sm font-mono text-rose-700">${ item.price }</p>
+                                <p className="text-[12px]">{item.title}</p>
+                                <p className="text-[12px] text-rose-700">${item.price}</p>
                             </div>
                         ))
                     ) : (
