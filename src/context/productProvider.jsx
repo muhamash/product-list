@@ -15,7 +15,7 @@ export default function ProductProvider({ children }) {
 
     const [state, dispatch] = useReducer(productReducer, initialState);
     const contextValue = { state, dispatch };
-    console.log( state );
+    // console.log( state );
 
     return (
         <ProductContext.Provider value={contextValue}>
