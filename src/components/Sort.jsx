@@ -36,6 +36,8 @@ export default function Sort() {
         document.removeEventListener( 'mousedown', handleClickOutside );
     };
 
+    // console.log('sorting')
+
     return (
         <div className="relative inline-block text-left dropdown">
             <div>

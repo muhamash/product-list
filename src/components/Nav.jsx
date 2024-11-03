@@ -10,124 +10,53 @@ export default function Nav({domRef}) {
     const [ active, setActive ] = React.useState( '' );
     const { state } = useProductContext();
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+    const toggleMenu = () =>
+    {
+        setIsMenuOpen( !isMenuOpen );
     };
 
-    const toggleActive = (item) => {
-        setActive(item);
-    };
+    const toggleActive = React.useCallback( ( item ) =>
+    {
+        setActive( item );
+    }, [] );
 
-    const handleNavigationLinks = ( item ) =>
+    const handleNavigationLinks = React.useCallback( ( item ) =>
     {
         toggleActive( item );
 
         document.getElementById( "store" )?.scrollIntoView( { behavior: 'smooth' } );
 
-        if ( [ 'Men', 'Women' ].includes( item ) && item === "Men" && state.selectedCategory === "men's clothing" || item === "Women" && state.selectedCategory === "women's clothing")
+        if ( [ 'Men', 'Women' ].includes( item ) )
         {
-            toast.error( `You have already selected ${item}'s category`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "colored",
-                transition: Bounce,
-            } );
+            if ( ( item === "Men" && state.selectedCategory === "men's clothing" ) || ( item === "Women" && state.selectedCategory === "women's clothing" ) )
+            {
+                toast.error( `You have already selected ${item}'s category`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "colored",
+                    transition: Bounce,
+                } );
+            } else
+            {
+                toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "colored",
+                    transition: Bounce,
+                } );
+            }
         }
-        else if ( [ 'Men', 'Women' ].includes( item ) && item !== state.selectedCategory)
-        {
-            toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "colored",
-                transition: Bounce,
-            } );
-        }
-        // {
-        //     if ( item === 'Men' )
-        //     {
-        //         if ( state.selectedCategory === "men's clothing" )
-        //         {
-        //             toast.info( `You have already selected ${item}'s category`, {
-        //                 position: "top-right",
-        //                 autoClose: 5000,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 theme: "colored",
-        //                 transition: Bounce,
-        //             } );
-        //         }
-        //         else
-        //         {
-        //             toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
-        //                 position: "top-right",
-        //                 autoClose: 5000,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 theme: "colored",
-        //                 transition: Bounce,
-        //             } );
-                
-        //         }
-        //         if ( item === "Women" )
-        //         {
-        //         if ( state.selectedCategory === "women's clothing" )
-        //         {
-        //             toast.info( `You have already selected ${item}'s category`, {
-        //                 position: "top-right",
-        //                 autoClose: 5000,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 theme: "colored",
-        //                 transition: Bounce,
-        //             } );
-        //         }
-        //         else
-        //         {
-        //             toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
-        //                 position: "top-right",
-        //                 autoClose: 5000,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 theme: "colored",
-        //                 transition: Bounce,
-        //             } );
-        //         }
-        //     }
-        // }
-        // else
-        // {
-        //     toast.info( `Please select ${item}'s product option at the category menu to get specific products`, {
-        //         position: "top-right",
-        //         autoClose: 5000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         theme: "colored",
-        //         transition: Bounce,
-        //     } );
-        // }
-        // auto scroll
 
         if ( domRef.current && [ 'Men', 'Women' ].includes( item ) )
         {
-            // domRef.current.scrollIntoView( { behavior: 'smooth' } );
             const intervalId = setInterval( () =>
             {
                 domRef.current.classList.toggle( "bg-rose-600" );
@@ -141,7 +70,7 @@ export default function Nav({domRef}) {
                 domRef.current.classList.remove( "bg-rose-600", "text-white", "scale-110" );
             }, 2000 );
         }
-    };
+    }, [ toggleActive, domRef, state.selectedCategory ] );
 
 
     return (

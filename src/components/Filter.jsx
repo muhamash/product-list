@@ -39,6 +39,7 @@ const Filter = forwardRef( (props, ref) => {
         }
     };
 
+    // console.log('filtering')
     return (
         <div className="relative inline-block text-left dropdown rounded-md">
             <div>

@@ -1,39 +1,44 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import useProductContext from "../hooks/useProductContext";
 
-export default function Cart() {
-    const [cartOpen, setCartOpen] = React.useState(false);
+const Cart = React.memo( function Cart ()
+{
+    const [ cartOpen, setCartOpen ] = React.useState( false );
     const { state } = useProductContext();
 
-    const handleOpenCart = () =>
-    {
-        if ( !cartOpen )
-        {
-            setCartOpen( true );
-            document.addEventListener( 'click', handleDocumentClick );
-        } else
-        {
-            setCartOpen( false );
-            document.removeEventListener( 'click', handleDocumentClick );
-        }
-    };
+    const cartItemCount = useMemo( () => state.addToCart.length, [ state.addToCart ] );
 
-    const handleDocumentClick = ( event ) =>
+    const handleDocumentClick = useCallback( ( event ) =>
     {
         if ( !event.target.closest( '.cart-button' ) && !event.target.closest( '.cart-dropdown' ) )
         {
             setCartOpen( false );
             document.removeEventListener( 'click', handleDocumentClick );
         }
-    };
+    }, [] );
+
+    const handleOpenCart = useCallback( () =>
+    {
+        setCartOpen( prevCartOpen => !prevCartOpen );
+
+        if ( !cartOpen )
+        {
+            document.addEventListener( 'click', handleDocumentClick );
+        } else
+        {
+            document.removeEventListener( 'click', handleDocumentClick );
+        }
+    }, [ cartOpen, handleDocumentClick ] );
+
+    // console.log( 'Cart Rendered' );
 
     return (
         <div className="relative">
-            {/* Cart Button */}
+            {/* Cart Button */ }
             <button
-                onClick={handleOpenCart}
+                onClick={ handleOpenCart }
                 className="group -m-2 flex items-center p-2 relative cart-button"
-                aria-expanded={cartOpen}
+                aria-expanded={ cartOpen }
             >
                 <svg
                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
@@ -50,31 +55,33 @@ export default function Cart() {
                     />
                 </svg>
                 <span className="ml-2 mt-1 text-sm font-medium text-gray-700 group-hover:text-gray-800 opacity-100 group-hover:opacity-0">
-                    {state.addToCart.length}
+                    { cartItemCount }
                 </span>
                 <span className="text-xs text-teal-700 opacity-0 group-hover:opacity-100 transition-opacity absolute right-0 bottom-8">
-                    {state.addToCart.length} items in cart, {cartOpen ? 'close' : 'view'} the bag
+                    { cartItemCount } items in cart, { cartOpen ? 'close' : 'view' } the bag
                 </span>
                 <span className="sr-only">
-                    {state.addToCart.length} items in cart, {cartOpen ? 'close' : 'view'} the bag
+                    { cartItemCount } items in cart, { cartOpen ? 'close' : 'view' } the bag
                 </span>
             </button>
 
-            {/* Cart Dropdown */}
-            {cartOpen && (
+            {/* Cart Dropdown */ }
+            { cartOpen && (
                 <div className="absolute z-10 right-0 mt-2 w-64 p-4 bg-teal-600 text-white rounded-md shadow-lg max-h-[300px] overflow-y-scroll cart-dropdown">
-                    {state.addToCart.length > 0 ? (
-                        state.addToCart.map((item, index) => (
-                            <div key={index} className="flex justify-between items-center mb-2">
-                                <p className="text-[12px]">{item.title}</p>
-                                <p className="text-[12px] text-rose-700">${item.price}</p>
+                    { cartItemCount > 0 ? (
+                        state.addToCart.map( ( item, index ) => (
+                            <div key={ index } className="flex justify-between items-center mb-2">
+                                <p className="text-[12px]">{ item.title }</p>
+                                <p className="text-[12px] text-rose-700">${ item.price }</p>
                             </div>
-                        ))
+                        ) )
                     ) : (
                         <p className="text-center text-sm">Your cart is empty!</p>
-                    )}
+                    ) }
                 </div>
-            )}
+            ) }
         </div>
     );
-};
+} );
+
+export default Cart;
